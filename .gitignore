@@ -1,0 +1,54 @@
+# vagrant
+.vagrant
+
+# User-specific files
+*.suo
+*.user
+
+# Build results
+[Dd]ebug
+[Dd]ebugPublic
+[Rr]elease
+[Rr]eleases
+x64
+x86
+bld
+[Bb]in
+[Oo]bj
+[Ll]og
+build-output/
+
+# Visual Studio 2015/17 cacheoptions directory
+.vs
+
+# MSTest test Results
+[Tt]est[Rr]esult
+[Bb]uild[Ll]og.
+
+# NUNIT
+.VisualState.xml
+TestResult.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS
+[Rr]eleasePS
+dlldata.c
+
+
+
+# ReSharper is a .NET coding add-in
+_ReSharper
+.[Rr]e[Ss]harper
+.DotSettings.user
+
+# NuGet Packages
+.nupkg
+# The packages folder can be ignored because of Package Restore
+packages
+# except build, which is used as an MSBuild target.
+!packagesbuild
+# Uncomment if necessary however generally it will be regenerated when needed
+#!packagesrepositories.config
+# NuGet v3's project.json files produces more ignoreable files
+.nuget.props
+.nuget.targets
