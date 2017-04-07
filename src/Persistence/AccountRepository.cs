@@ -8,10 +8,11 @@ namespace SimpleBankApplication.Persistence
         {
             if (accountNumber == "123")
             {
-                return new Account();
+                return new Account(new AccountNumber(accountNumber));
             }
 
-            return new Account(new[] { new DepositTransaction(new Money(Currency.Euro, 100)) });
+            return new Account(new AccountNumber("234")
+                               , new[] { new DepositApplied(new Money(Currency.Euro, 100)) });
         }
     }
 }

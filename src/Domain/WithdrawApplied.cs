@@ -2,11 +2,10 @@
 
 namespace SimpleBankApplication.Domain
 {
-    internal class DepositTransaction : DomainEvent
+    internal class WithdrawApplied : DomainEvent
     {
         public Money Money { get; private set; }
-
-        public DepositTransaction(Money money)
+        public WithdrawApplied(Money money)
         {
             Money = money;
         }

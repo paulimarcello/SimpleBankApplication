@@ -1,11 +1,8 @@
-FROM microsoft/dotnet:latest
+FROM microsoft/aspnetcore
 
 RUN mkdir /app
-COPY . /app
+COPY /SimpleBankApplication/bin/Release/netcoreapp1.1/publish /app/
 WORKDIR /app
-
-RUN dotnet restore
-RUN dotnet publish --output /app/ --configuration Release
 
 EXPOSE 5000/tcp
 ENV ASPNETCORE_URLS http://*:5000

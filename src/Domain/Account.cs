@@ -6,24 +6,26 @@ namespace SimpleBankApplication.Domain
 {
     internal class Account
     {
-        public Balance Balance;
+        public AccountNumber AccountNumber { get; private set; }
+        public Balance Balance { get; private set; }
 
 
-        public Account()
+        public Account(AccountNumber accountNumber)
         {
+            AccountNumber = accountNumber;
             Balance = new Balance(Currency.Euro, 0);
         }
 
-        public Account(IEnumerable<DomainEvent> events) : this()
+        public Account(AccountNumber accountNumber, IEnumerable<DomainEvent> history) : this(accountNumber)
         {
-            foreach (var @event in events)
-                Apply((dynamic)@event);
+            foreach (var @event in history)
+                Apply(@event);
         }
 
 
         public void Deposit(Money money)
         {
-            Apply(new DepositTransaction(money));
+            Apply(new DepositApplied(money));
         }
 
         public void Withdraw(Money money)
@@ -34,17 +36,19 @@ namespace SimpleBankApplication.Domain
                 throw new Exception("No CreditLimit for this account");
             }
 
-            Apply(new WithdrawTransaction(money));
+            Apply(new WithdrawApplied(money));
         }
 
 
-        private void Apply(DepositTransaction depositTransaction)
+        private void Apply(DomainEvent @event) => When((dynamic)@event);
+
+        private void When(DepositApplied depositApplied)
         {
-            Balance = Balance.IncreaseWith(depositTransaction.Money);
+            Balance = Balance.IncreaseWith(depositApplied.Money);
         }
-        private void Apply(WithdrawTransaction withdrawTransaction)
+        private void When(WithdrawApplied withdrawApplied)
         {
-            Balance = Balance.DecreaseWith(withdrawTransaction.Money);
+            Balance = Balance.DecreaseWith(withdrawApplied.Money);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SimpleBankApplication.DomainTests.UnitTests
 
         public AccountTests()
         {
-            _account = new Account();
+            _account = new Account(new AccountNumber("1"));
         }
 
         [Fact]
@@ -38,10 +38,10 @@ namespace SimpleBankApplication.DomainTests.UnitTests
         [Fact]
         public void Withdraw_AccountWithMoreMoneyThanToWithdraw_BalanceWillBeDecreased()
         {
-            _account = new Account(new []
+            _account = new Account(new AccountNumber("1"), new []
                                 {
-                                    new DepositTransaction(new Money(Currency.Euro, 100)),
-                                    new DepositTransaction(new Money(Currency.Euro, 20))
+                                    new DepositApplied(new Money(Currency.Euro, 100)),
+                                    new DepositApplied(new Money(Currency.Euro, 20))
                                 });
             _account.Withdraw(new Money(Currency.Euro, 80));
 
